@@ -1,7 +1,6 @@
 #ifndef BINARYTREE_HPP
 #define BINARYTREE_HPP
 
-#include <memory>
 #include <cstdint>
 #include <stdexcept>
 
@@ -50,6 +49,16 @@ class LinkedList{
             this->size = 0;
         }
 
+        ~LinkedList(){
+            while (this->root != nullptr) {
+                Node<T>* current = root;
+                this->root = root->get_next();
+                delete current; // Deallocate the memory of the current node
+            }
+            this->last = nullptr;
+            this->size = 0;
+        }
+
         void insert(const T &item, unsigned int index) {
             if (index > size || index < 0) {
                 throw std::runtime_error("Index out of bounds");
@@ -77,11 +86,11 @@ class LinkedList{
             size++;
         }
 
-        std::shared_ptr<Node<T>> get_root() const {
+        Node<T>* get_root() const {
             return this->root;
         }
 
-        std::shared_ptr<Node<T>> get_last() const {
+        Node<T>* get_last() const {
             return this->last;
         }
 
@@ -90,9 +99,17 @@ class LinkedList{
         }
 };
 
+template <class T>
 class Graph{
     private:
-        
+        LinkedList<LinkedList<int>> <T>* adjacencyList_;
+        unsigned int vertex;
+
+    public:
+        Graph(){
+            
+        }
+
 };
 
         
