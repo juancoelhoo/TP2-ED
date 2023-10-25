@@ -90,6 +90,11 @@ class LinkedList{
         }
 };
 
+class Graph{
+    private:
+        
+};
+
         
 
 #endif
