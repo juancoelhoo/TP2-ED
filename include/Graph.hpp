@@ -1,117 +1,169 @@
-#ifndef BINARYTREE_HPP
-#define BINARYTREE_HPP
+#include <iostream>
+#include <string>
+#include <sstream>
+using namespace std;
 
-#include <cstdint>
-#include <stdexcept>
-
-template <class T>
-class Node {
-    private:
-        Node<T>* next;
-        T data;
-
-    public:
-        Node(T data){
-            next = nullptr;
-            data = data;
-        }
-
-        Node<T>* get_next() const {
-            return next;
-        }
-
-        void set_next(Node<T>* next) {
-            this->next = next;
-        }
-
-        T get_data() const {
-            return data;
-        }
+// Data structure to store adjacency list nodes
+struct Node
+{
+    int val, color;
+    Node* next;
 };
 
-
-template <class T>
-class LinkedList{
-    private:
-        Node<T>* root;
-        Node<T>* last;
-        unsigned int size;
-
-    public:
-        LinkedList(const T &item) {
-            this->last = this->root = Node<T>* (item);
-            this->size = 1;
-        }
-
-        LinkedList() {
-            this->root = nullptr;
-            this->last = nullptr;
-            this->size = 0;
-        }
-
-        ~LinkedList(){
-            while (this->root != nullptr) {
-                Node<T>* current = root;
-                this->root = root->get_next();
-                delete current; // Deallocate the memory of the current node
-            }
-            this->last = nullptr;
-            this->size = 0;
-        }
-
-        void insert(const T &item, unsigned int index) {
-            if (index > size || index < 0) {
-                throw std::runtime_error("Index out of bounds");
-            }
-
-            auto p = this->root;
-            for (unsigned int i = 0; i < index; i++) {
-                p = p->get_next();
-            }
-
-            auto newNode = Node<T>* (item);
-            newNode->set_next(p->get_next());
-            p->set_next(newNode);
-            size++;
-        }
-
-        void insert(const T &item) {
-            auto newNode = Node<T>* (item);
-            if (this->root == nullptr) {
-                this->root = this->last = newNode;
-            } else {
-                this->last->set_next(newNode);
-                this->last = newNode;
-            }
-            size++;
-        }
-
-        Node<T>* get_root() const {
-            return this->root;
-        }
-
-        Node<T>* get_last() const {
-            return this->last;
-        }
-
-        int get_size() const {
-            return this->size;
-        }
+// Data structure to store a graph edge
+struct Edge {
+    int src, dest;
 };
 
-template <class T>
-class Graph{
-    private:
-        LinkedList<LinkedList<int>> <T>* adjacencyList_;
-        unsigned int vertex;
+class Graph
+{
+    // Function to allocate a new node for the adjacency list
+    Node* getAdjListNode(int dest, Node* head)
+    {
+        Node* newNode = new Node;
+        newNode->val = dest;
 
-    public:
-        Graph(){
-            
+        // point new node to the current head
+        newNode->next = head;
+
+        return newNode;
+    }
+
+    int N;    // total number of nodes in the graph
+
+public:
+
+    // An array of pointers to Node to represent the
+    // adjacency list
+    Node **head;
+
+    // Constructor
+    Graph(Edge edges[], int n, int N)
+    {
+        // allocate memory
+        head = new Node*[N]();
+        this->N = N;
+
+        // initialize head pointer for all vertices
+        for (int i = 0; i < N; i++) {
+            head[i] = nullptr;
         }
 
+        // add edges to the directed graph
+        for (unsigned i = 0; i < n; i++)
+        {
+            int src = edges[i].src;
+            int dest = edges[i].dest;
+
+            // Insert the edge only if it doesn't already exist
+            if (!edgeExists(src, dest))
+            {
+                Node* newNode = getAdjListNode(dest, head[src]);
+                head[src] = newNode;
+
+                // Uncomment the following code for undirected graph
+                newNode = getAdjListNode(src, head[dest]);
+                head[dest] = newNode;
+            }
+        }
+    }
+
+    bool edgeExists(int src, int dest)
+    {
+        // Check if the edge already exists in the adjacency list
+        Node* current = head[src];
+        while (current)
+        {
+            if (current->val == dest)
+                return true;
+            current = current->next;
+        }
+        return false;
+    }
+
+    // Destructor
+    ~Graph() {
+        for (int i = 0; i < N; i++) {
+            Node* current = head[i];
+            while (current) {
+                Node* next = current->next;
+                delete current;
+                current = next;
+            }
+        }
+        delete[] head;
+    }
 };
 
-        
+// Function to print all neighboring vertices of a given vertex
+void printList(Node* ptr)
+{
+    while (ptr != nullptr)
+    {
+        cout << " —> " << ptr->val;
+        ptr = ptr->next;
+    }
+    cout << endl;
+}
 
-#endif
+int main()
+{
+    string input;
+    getline(cin, input);  // Read a line of input as a string
+
+    char method;
+    int verticesNumber;
+    istringstream iss(input);  // Use a stringstream to parse the input string
+    if (iss >> method >> verticesNumber) {
+        // Successfully parsed a character followed by an integer
+        cout << "Character: " << method << endl;
+        cout << "Integer: " << verticesNumber << endl;
+    } else {
+        cout << "Invalid input format." << endl;
+    }
+
+    Edge edges[100];  // Adjust the array size as needed
+    int edgeCount = 0;
+
+    for (int i = 0; i < verticesNumber; i++) {
+        string input;
+        getline(cin, input);
+
+        int m; // Number of neighbors
+        istringstream iss(input);
+        iss >> m;
+
+        for (int j = 0; j < m; j++) {
+            int neighbor;
+            iss >> neighbor;
+
+            // Add an edge from vertex i to neighbor
+            edges[edgeCount].src = i;
+            edges[edgeCount].dest = neighbor;
+            edgeCount++;
+
+            // Add the corresponding edge from neighbor to vertex i
+            edges[edgeCount].src = neighbor;
+            edges[edgeCount].dest = i;
+            edgeCount++;
+        }
+    }
+
+    // calculate the total number of edges
+    int edgeNumber = edgeCount;
+
+    // construct graph
+    Graph graph(edges, edgeCount, verticesNumber);
+
+    // print adjacency list representation of a graph
+    for (int i = 0; i < verticesNumber; i++)
+    {
+        // print given vertex
+        cout << i;
+
+        // print all its neighboring vertices
+        printList(graph.head[i]);
+    }
+
+    return 0;
+}
