@@ -4,27 +4,26 @@
 void parseArgs()
 {
     string input;
-    getline(cin, input);  // Read a line of input as a string
+    getline(cin, input);
 
     char method;
     int verticesNumber;
-    istringstream iss(input);  // Use a stringstream to parse the input string
+    istringstream iss(input); 
     if (iss >> method >> verticesNumber) {
-        // Successfully parsed a character followed by an integer
         cout << "Character: " << method << endl;
         cout << "Integer: " << verticesNumber << endl;
     } else {
         cout << "Invalid input format." << endl;
     }
 
-    Edge edges[100];  // Adjust the array size as needed
+    Edge edges[100];
     unsigned int edgeCount = 0;
 
     for (int i = 0; i < verticesNumber; i++) {
         string input;
         getline(cin, input);
 
-        int m; // Number of neighbors
+        int m;
         istringstream iss(input);
         iss >> m;
 
@@ -43,18 +42,14 @@ void parseArgs()
             edgeCount++;
         }
     }
-
-    // construct graph
     Graph graph(edges, edgeCount, verticesNumber);
 
     // print adjacency list representation of a graph
     for (int i = 0; i < verticesNumber; i++)
     {
-        // print given vertex
         cout << i;
 
-        // print all its neighboring vertices
-        printList(graph.head[i]);
+        graph.printList(graph.head[i]);
     }
 }
 
