@@ -33,14 +33,7 @@ Graph::Graph(Edge edges[], unsigned int n, int N)
     {
         Node* newNode = getAdjListNode(dest, head[src]);
         head[src] = newNode;
-
-        // Uncomment the following code for an undirected graph
-        // newNode = getAdjListNode(src, head[dest]);
-        // head[dest] = newNode;
-
-        // Update the degrees array for both vertices
         degrees[src]++;
-        // degrees[dest]++;
     }
 }
 }
@@ -79,5 +72,6 @@ void Graph::printList(Node* ptr)
         ptr = ptr->next;
     }
     cout << endl;
+    
 }
 

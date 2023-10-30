@@ -21,9 +21,9 @@ class Graph
     Node* getAdjListNode(int dest, Node* head);
 
     int N;    // total number of nodes in the graph
-    int* degrees;
+    
 public:
-
+    int* degrees;
     // An array of pointers to Node to represent the
     // adjacency list
     Node **head;
