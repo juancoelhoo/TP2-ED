@@ -13,32 +13,36 @@ Node* Graph::getAdjListNode(int dest, Node* head)
 
 Graph::Graph(Edge edges[], unsigned int n, int N)
 {
-        // allocate memory
-        head = new Node*[N]();
-        this->N = N;
+        // Allocate memory
+    head = new Node*[N]();
+    degrees = new int[N](); // Initialize degrees array to all zeros
+    this->N = N;
 
-        // initialize head pointer for all vertices
-        for (int i = 0; i < N; i++) {
-            head[i] = nullptr;
-        }
+    // Initialize head pointer for all vertices
+    for (int i = 0; i < N; i++) {
+        head[i] = nullptr;
+    }
 
-        // add edges to the directed graph
-        for (unsigned i = 0; i < n; i++)
-        {
-            int src = edges[i].src;
-            int dest = edges[i].dest;
+    for (unsigned i = 0; i < n; i++)
+{
+    int src = edges[i].src;
+    int dest = edges[i].dest;
 
-            // Insert the edge only if it doesn't already exist
-            if (!edgeExists(src, dest))
-            {
-                Node* newNode = getAdjListNode(dest, head[src]);
-                head[src] = newNode;
+    // Insert the edge only if it doesn't already exist
+    if (!edgeExists(src, dest))
+    {
+        Node* newNode = getAdjListNode(dest, head[src]);
+        head[src] = newNode;
 
-                // Uncomment the following code for undirected graph
-                newNode = getAdjListNode(src, head[dest]);
-                head[dest] = newNode;
-            }
-        }
+        // Uncomment the following code for an undirected graph
+        // newNode = getAdjListNode(src, head[dest]);
+        // head[dest] = newNode;
+
+        // Update the degrees array for both vertices
+        degrees[src]++;
+        // degrees[dest]++;
+    }
+}
 }
 
 bool Graph::edgeExists(int src, int dest)
@@ -56,14 +60,15 @@ bool Graph::edgeExists(int src, int dest)
 
 Graph::~Graph(){
     for (int i = 0; i < N; i++) {
-            Node* current = head[i];
-            while (current) {
-                Node* next = current->next;
-                delete current;
-                current = next;
-            }
+        Node* current = head[i];
+        while (current) {
+            Node* next = current->next;
+            delete current;
+            current = next;
         }
-        delete[] head;
+    }
+    delete[] head;
+    delete[] degrees;
 }
 
 void Graph::printList(Node* ptr)
@@ -75,3 +80,4 @@ void Graph::printList(Node* ptr)
     }
     cout << endl;
 }
+

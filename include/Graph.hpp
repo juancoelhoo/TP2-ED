@@ -21,7 +21,7 @@ class Graph
     Node* getAdjListNode(int dest, Node* head);
 
     int N;    // total number of nodes in the graph
-
+    int* degrees;
 public:
 
     // An array of pointers to Node to represent the
@@ -31,6 +31,7 @@ public:
     // Constructor
     Graph(Edge edges[], unsigned int n, int N);
 
+
     bool edgeExists(int src, int dest);
 
     // Destructor
@@ -38,6 +39,7 @@ public:
 
     // Function to print all neighboring vertices of a given vertex
     void printList(Node* ptr);
+
 };
 
 

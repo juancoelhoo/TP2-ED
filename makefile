@@ -11,7 +11,8 @@ CFLAGS = -Wall -std=c++11 -c -g -I$(INC)
 EXE = $(BIN)/main
 
 run:  $(EXE)
-		./$(EXE)
+		./$(EXE) 
+		
 	
 
 $(BIN)/main: $(OBJS)
