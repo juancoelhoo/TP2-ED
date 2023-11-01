@@ -41,8 +41,6 @@ Graph::Graph(Edge edges[], unsigned int n, int N, Node* vertices)
     {
         this->head[i]->color = vertices[i].color;
     }
-    
-
 }
 
 bool Graph::edgeExists(int src, int dest)

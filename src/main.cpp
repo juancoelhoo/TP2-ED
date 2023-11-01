@@ -18,7 +18,7 @@ void parseArgs()
     }
 
     // Builds the edges
-    Edge edges[100];
+    Edge edges[verticesNumber * 2];
     edges->edgeAssign(edges, verticesNumber);
 
     // Catches the color of all vertices
