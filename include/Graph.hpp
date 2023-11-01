@@ -1,3 +1,6 @@
+#ifndef GRAPH_HPP
+#define GRAPH_HPP
+
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -13,6 +16,29 @@ struct Node
 // Data structure to store a graph edge
 struct Edge {
     int src, dest;
+    unsigned int edgeCount = 0;
+
+    void edgeAssign(Edge* edges, int n)
+    {
+        for (int i = 0; i < n; i++) {
+            string input;
+            getline(cin, input);
+
+            int neighborNumber;
+            istringstream iss(input);
+            iss >> neighborNumber;
+
+                for (int j = 0; j < neighborNumber; j++) {
+                    int neighbor;
+                    iss >> neighbor;
+
+                    // Add an edge from vertex i to neighbor
+                    edges[edgeCount].src = i;
+                    edges[edgeCount].dest = neighbor;
+                    edgeCount++;
+                }
+        }   
+    }
 };
 
 class Graph
@@ -26,7 +52,7 @@ public:
     int* degrees;
     // An array of pointers to Node to represent the
     // adjacency list
-    Node **head;
+    Node** head;
 
     // Constructor
     Graph(Edge edges[], unsigned int n, int N);
@@ -42,4 +68,4 @@ public:
 
 };
 
-
+#endif

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../include/Graph.hpp"
+#include "../include/GreedyAlgorithm.hpp"
 
 void parseArgs()
 {
@@ -17,52 +18,22 @@ void parseArgs()
     }
 
     Edge edges[100];
-    unsigned int edgeCount = 0;
+    edges->edgeAssign(edges, verticesNumber);
 
-    for (int i = 0; i < verticesNumber; i++) {
-        string input;
-        getline(cin, input);
-
-        int neighborNumber;
-        istringstream iss(input);
-        iss >> neighborNumber;
-
-        for (int j = 0; j < neighborNumber; j++) {
-            int neighbor;
-            iss >> neighbor;
-
-            // Add an edge from vertex i to neighbor
-            edges[edgeCount].src = i;
-            edges[edgeCount].dest = neighbor;
-            edgeCount++;
-
-            // // Add the corresponding edge from neighbor to vertex i
-            // edges[edgeCount].src = neighbor;
-            // edges[edgeCount].dest = i;
-            // edgeCount++;
-        }
-    }
-    Graph graph(edges, edgeCount, verticesNumber);
+    Graph graph(edges, edges->edgeCount, verticesNumber);
 
     // Create an array of Node to represent the vertices with colors
     Node vertices[verticesNumber];
-
-    // Read colors for each vertex and assign to the corresponding node
-    string colorLine;
-    getline(cin, colorLine);
-    istringstream colorIss(colorLine);
-
-    for (int i = 0; i < verticesNumber; i++) {
-        colorIss >> vertices[i].color;
-    }
+    verticesColoring(vertices, verticesNumber);
 
     // Print adjacency list representation of a graph
     for (int i = 0; i < verticesNumber; i++) {
         cout << i;
 
         graph.printList(graph.head[i]);
-        cout << " Color: " << vertices[i].color << endl;
+        cout << "Color: " << vertices[i].color << endl;
     }
+
 }
 
 
