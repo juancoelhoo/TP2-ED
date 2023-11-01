@@ -17,13 +17,16 @@ void parseArgs()
         cout << "Invalid input format." << endl;
     }
 
+    // Builds the edges
     Edge edges[100];
     edges->edgeAssign(edges, verticesNumber);
 
-    Node vertices[verticesNumber];
-    vertices->verticesColoring(vertices, verticesNumber);
+    // Catches the color of all vertices
+    Node verticesColor[verticesNumber];
+    verticesColor->verticesColoring(verticesColor, verticesNumber);
 
-    Graph graph(edges, edges->edgeCount, verticesNumber, vertices);
+    // Builds the graph and colour its vertices
+    Graph graph(edges, edges->edgeCount, verticesNumber, verticesColor);
 
 
     // Print adjacency list representation of a graph
