@@ -23,11 +23,11 @@ void parseArgs()
         string input;
         getline(cin, input);
 
-        int m;
+        int neighborNumber;
         istringstream iss(input);
-        iss >> m;
+        iss >> neighborNumber;
 
-        for (int j = 0; j < m; j++) {
+        for (int j = 0; j < neighborNumber; j++) {
             int neighbor;
             iss >> neighbor;
 
