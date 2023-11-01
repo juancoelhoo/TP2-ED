@@ -36,10 +36,10 @@ void parseArgs()
             edges[edgeCount].dest = neighbor;
             edgeCount++;
 
-            // Add the corresponding edge from neighbor to vertex i
-            edges[edgeCount].src = neighbor;
-            edges[edgeCount].dest = i;
-            edgeCount++;
+            // // Add the corresponding edge from neighbor to vertex i
+            // edges[edgeCount].src = neighbor;
+            // edges[edgeCount].dest = i;
+            // edgeCount++;
         }
     }
     Graph graph(edges, edgeCount, verticesNumber);
