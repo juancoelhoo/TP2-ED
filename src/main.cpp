@@ -21,7 +21,7 @@ void parseArgs()
     Edge edges[verticesNumber * 2];
     edges->edgeAssign(edges, verticesNumber);
 
-    // Catches the color of all vertices
+    // Assigns the color of all vertices
     Node verticesColor[verticesNumber];
     verticesColor->verticesColoring(verticesColor, verticesNumber);
 

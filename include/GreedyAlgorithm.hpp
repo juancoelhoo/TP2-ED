@@ -3,6 +3,9 @@
 #include <sstream>
 #include "../include/Graph.hpp"
 
-
+bool greedyAlgorithm_check()
+{
+    
+}
 
 #endif

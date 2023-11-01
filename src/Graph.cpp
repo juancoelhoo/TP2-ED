@@ -11,7 +11,7 @@ Node* Graph::getAdjListNode(int dest, Node* head)
         return newNode;
 }
 
-Graph::Graph(Edge edges[], unsigned int n, int N, Node* vertices)
+Graph::Graph(Edge edges[], unsigned int n, int N, Node* verticesColor)
 {
     // Allocate memory
     head = new Node*[N]();
