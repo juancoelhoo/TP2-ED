@@ -31,6 +31,7 @@ void parseArgs()
         cout << i;
 
         graph.printList(graph.head[i]);
+        cout << "Color: " << graph.head[i]->color << endl;
     }
 
 }

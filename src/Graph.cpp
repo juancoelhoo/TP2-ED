@@ -76,7 +76,6 @@ void Graph::printList(Node* ptr)
     while (ptr != nullptr)
     {
         cout << " —> " << ptr->val;
-        cout << " Color: " << ptr->color;
         ptr = ptr->next;
     }
     cout << endl;
