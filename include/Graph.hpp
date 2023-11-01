@@ -11,7 +11,20 @@ struct Node
 {
     int val, color;
     Node* next;
+
+    void verticesColoring(Node* vertices, int verticesNumber)
+    {
+        string colorLine;
+        getline(cin, colorLine);
+        istringstream colorIss(colorLine);
+
+        for (int i = 0; i < verticesNumber; i++) {
+            colorIss >> vertices[i].color;
+        }
+    }   
+
 };
+
 
 // Data structure to store a graph edge
 struct Edge {
@@ -41,30 +54,29 @@ struct Edge {
     }
 };
 
+
 class Graph
 {
     // Function to allocate a new node for the adjacency list
     Node* getAdjListNode(int dest, Node* head);
 
-    int N;    // total number of nodes in the graph
+    int N;
     
 public:
     int* degrees;
-    // An array of pointers to Node to represent the
-    // adjacency list
     Node** head;
 
     // Constructor
-    Graph(Edge edges[], unsigned int n, int N);
+    Graph(Edge edges[], unsigned int n, int N, Node* vertices);
 
-
+    // Checks if the edge exists 
     bool edgeExists(int src, int dest);
-
-    // Destructor
-    ~Graph();
 
     // Function to print all neighboring vertices of a given vertex
     void printList(Node* ptr);
+
+    // Destructor
+    ~Graph();
 
 };
 

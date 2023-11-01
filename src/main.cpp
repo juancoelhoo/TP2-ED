@@ -20,18 +20,17 @@ void parseArgs()
     Edge edges[100];
     edges->edgeAssign(edges, verticesNumber);
 
-    Graph graph(edges, edges->edgeCount, verticesNumber);
-
-    // Create an array of Node to represent the vertices with colors
     Node vertices[verticesNumber];
-    verticesColoring(vertices, verticesNumber);
+    vertices->verticesColoring(vertices, verticesNumber);
+
+    Graph graph(edges, edges->edgeCount, verticesNumber, vertices);
+
 
     // Print adjacency list representation of a graph
     for (int i = 0; i < verticesNumber; i++) {
         cout << i;
 
         graph.printList(graph.head[i]);
-        cout << "Color: " << vertices[i].color << endl;
     }
 
 }
