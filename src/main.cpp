@@ -44,12 +44,24 @@ void parseArgs()
     }
     Graph graph(edges, edgeCount, verticesNumber);
 
-    // print adjacency list representation of a graph
-    for (int i = 0; i < verticesNumber; i++)
-    {
+    // Create an array of Node to represent the vertices with colors
+    Node vertices[verticesNumber];
+
+    // Read colors for each vertex and assign to the corresponding node
+    string colorLine;
+    getline(cin, colorLine);
+    istringstream colorIss(colorLine);
+
+    for (int i = 0; i < verticesNumber; i++) {
+        colorIss >> vertices[i].color;
+    }
+
+    // Print adjacency list representation of a graph
+    for (int i = 0; i < verticesNumber; i++) {
         cout << i;
 
         graph.printList(graph.head[i]);
+        cout << " Color: " << vertices[i].color << endl;
     }
 }
 
