@@ -78,6 +78,7 @@ public:
     // Function to print all neighboring vertices of a given vertex
     void printList(Node* ptr);
 
+    // Prints the vertices neighbours of a vertex
     void printNeighboringVertices(int vertex);
 
     // Destructor

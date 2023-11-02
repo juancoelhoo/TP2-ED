@@ -3,6 +3,10 @@
 #include "../include/GreedyAlgorithm.hpp"
 #include "../include/Sort.hpp"
 
+void graphBuliding(){
+    
+}
+
 void parseArgs()
 {
     string input;
@@ -29,7 +33,9 @@ void parseArgs()
     // Builds the graph and colour its vertices
     Graph graph(edges, edges->edgeCount, verticesNumber, verticesColor);
 
-    bubbleSort(graph.head, verticesNumber);
+    sortMethodSelection(method, graph.head, verticesNumber);
+
+    //bubbleSort(graph.head, verticesNumber);
 
     // Print adjacency list representation of a graph
     for (int i = 0; i < verticesNumber; i++) {
