@@ -9,7 +9,7 @@ using namespace std;
 // Data structure to store adjacency list nodes
 struct Node
 {
-    int val, color;
+    int val, neighbors, color;
     Node* next;
 
     void verticesColoring(Node* vertices, int verticesNumber)
@@ -69,11 +69,16 @@ public:
     // Constructor
     Graph(Edge edges[], unsigned int n, int N, Node* vertices);
 
+    // Returns the graph size
+    int getSize();
+
     // Checks if the edge exists 
     bool edgeExists(int src, int dest);
 
     // Function to print all neighboring vertices of a given vertex
     void printList(Node* ptr);
+
+    void printNeighboringVertices(int vertex);
 
     // Destructor
     ~Graph();

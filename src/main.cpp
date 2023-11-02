@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/Graph.hpp"
 #include "../include/GreedyAlgorithm.hpp"
+#include "../include/Sort.hpp"
 
 void parseArgs()
 {
@@ -28,10 +29,11 @@ void parseArgs()
     // Builds the graph and colour its vertices
     Graph graph(edges, edges->edgeCount, verticesNumber, verticesColor);
 
+    bubbleSort(graph.head, verticesNumber);
 
     // Print adjacency list representation of a graph
     for (int i = 0; i < verticesNumber; i++) {
-        cout << i;
+        cout << graph.head[i]->val;
 
         graph.printList(graph.head[i]);
         cout << "Color: " << graph.head[i]->color << endl;

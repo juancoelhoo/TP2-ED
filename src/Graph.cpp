@@ -3,7 +3,7 @@
 Node* Graph::getAdjListNode(int dest, Node* head)
 {
         Node* newNode = new Node;
-        newNode->val = dest;
+        newNode->neighbors = dest;
 
         // point new node to the current head
         newNode->next = head;
@@ -37,10 +37,14 @@ Graph::Graph(Edge edges[], unsigned int n, int N, Node* verticesColor)
         }
     }
 
-    for (int i = 0; i < N; i++)
-    {
-        this->head[i]->color = vertices[i].color;
+    for (int i = 0; i < N; i++){
+        this->head[i]->color = verticesColor[i].color;
+        this->head[i]->val = i;
     }
+}
+
+int Graph::getSize(){
+    return this->N;
 }
 
 bool Graph::edgeExists(int src, int dest)
@@ -49,7 +53,7 @@ bool Graph::edgeExists(int src, int dest)
         Node* current = head[src];
         while (current)
         {
-            if (current->val == dest)
+            if (current->neighbors == dest)
                 return true;
             current = current->next;
         }
@@ -73,10 +77,30 @@ void Graph::printList(Node* ptr)
 {
     while (ptr != nullptr)
     {
-        cout << " —> " << ptr->val;
+        cout << " —> " << ptr->neighbors;
         ptr = ptr->next;
     }
     cout << endl;
     
 }
+
+void Graph::printNeighboringVertices(int vertex) {
+    if (vertex >= 0 && vertex < N) {
+        Node* current = head[vertex];
+
+        if (current == nullptr) {
+            cout << "No neighboring vertices for node " << vertex << endl;
+        } else {
+            cout << "Neighboring vertices of node " << vertex << ": ";
+            while (current != nullptr) {
+                cout << current->neighbors << " ";
+                current = current->next;
+            }
+            cout << endl;
+        }
+    } else {
+        cout << "Inneighborsid node index: " << vertex << endl;
+    }
+}
+
 
