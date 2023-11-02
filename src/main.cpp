@@ -34,8 +34,7 @@ void parseArgs()
     Graph graph(edges, edges->edgeCount, verticesNumber, verticesColor);
 
     sortMethodSelection(method, graph.head, verticesNumber);
-
-    //bubbleSort(graph.head, verticesNumber);
+    // bool result = greedyAlgorithm_check(graph, verticesNumber);
 
     // Print adjacency list representation of a graph
     for (int i = 0; i < verticesNumber; i++) {
