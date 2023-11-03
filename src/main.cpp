@@ -28,18 +28,24 @@ Graph graphBuilding(int verticesNumber)
 
 int main()
 {   
-    string input;
-    getline(cin, input);
+    // string input;
+    // getline(cin, input);
+
+    // char method;
+    // int verticesNumber;
+    // istringstream iss(input);
+    // if (iss >> method >> verticesNumber) {
+    //     cout << "Character: " << method << "; ";
+    //     cout << "Integer: " << verticesNumber << endl;
+    // } else {
+    //     cout << "Invalid input format." << endl;
+    // }
 
     char method;
     int verticesNumber;
-    istringstream iss(input);
-    if (iss >> method >> verticesNumber) {
-        cout << "Character: " << method << "; ";
-        cout << "Integer: " << verticesNumber << endl;
-    } else {
-        cout << "Invalid input format." << endl;
-    }
+
+    cin >> method;
+    cin >> verticesNumber;
 
     Graph graph = graphBuilding (verticesNumber);
     

@@ -8,15 +8,19 @@ OBJS = $(OBJ)/main.o  $(OBJ)/Graph.o  $(OBJ)/Sort.o
 HDRS = $(INC)/Graph.hpp $(INC)/Sort.hpp $(INC)/GreedyAlgorithm.hpp
 CFLAGS = -Wall -std=c++11 -c -g -I$(INC)
 
-EXE = $(BIN)/main
+
+EXE = $(BIN)/tp2.out
 
 run:  $(EXE)
 		./$(EXE) 
+
+all: $(EXE)
+		./$(EXE)
 		
 
 
-$(BIN)/main: $(OBJS)
-	$(CC) -g -o $(BIN)/main $(OBJS) $(LIBS)
+$(BIN)/tp2.out: $(OBJS)
+	$(CC) -g -o $(BIN)/tp2.out $(OBJS) $(LIBS)
 
 $(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <string>
-#include <sstream>
 using namespace std;
 
 // Data structure to store adjacency list nodes
@@ -18,12 +17,8 @@ struct Node
 
     void verticesColoring(Node* vertices, int verticesNumber)
     {
-        string colorLine;
-        getline(cin, colorLine);
-        istringstream colorIss(colorLine);
-
         for (int i = 0; i < verticesNumber; i++) {
-            colorIss >> vertices[i].color;
+            cin >> vertices[i].color;
         }
     }   
 
@@ -40,23 +35,19 @@ struct Edge {
     void edgeAssign(Edge* edges, int n)
     {
         for (int i = 0; i < n; i++) {
-            string input;
-            getline(cin, input);
+        int neighborNumber;
+        cin >> neighborNumber;
 
-            int neighborNumber;
-            istringstream iss(input);
-            iss >> neighborNumber;
+        for (int j = 0; j < neighborNumber; j++) {
+                int neighbor;
+                cin >> neighbor;
 
-                for (int j = 0; j < neighborNumber; j++) {
-                    int neighbor;
-                    iss >> neighbor;
-
-                    // Add an edge from vertex i to neighbor
-                    edges[edgeCount].src = i;
-                    edges[edgeCount].dest = neighbor;
-                    edgeCount++;
-                }
-        }   
+                // Add an edge from vertex i to neighbor
+                edges[edgeCount].src = i;
+                edges[edgeCount].dest = neighbor;
+                edgeCount++;
+            }   
+        }  
     }
 };
 
