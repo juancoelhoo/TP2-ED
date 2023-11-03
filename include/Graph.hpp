@@ -85,7 +85,7 @@ public:
     void printList(Node* ptr);
 
     // Prints the vertices neighbours of a vertex
-    void printNeighboringVertices(int vertex);
+    void printGraph();
 
     // Destructor
     ~Graph();

@@ -14,7 +14,7 @@ void bubbleSort(Node** arr, int n);
 
 // Sort a list of nodes using the specified sorting method ('method') based on the Node attributes
 // 'adjacencyList' is the list of nodes to be sorted, and 'verticesNumber' is the number of vertices in the graph
-void sortMethodSelection(char method, Node** adjacencyList, int verticesNumber);
+void sortMethodSelection(char method, Node** AdjacencyList, int VerticesNumber);
 
 
 #endif

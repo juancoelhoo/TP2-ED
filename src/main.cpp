@@ -2,26 +2,8 @@
 #include "../include/Graph.hpp"
 #include "../include/GreedyAlgorithm.hpp"
 #include "../include/Sort.hpp"
-void sortAndprintGraph(char method, Node** AdjacencyList, int verticesNumber)
-{
-    sortMethodSelection(method, AdjacencyList, verticesNumber);
 
-    bool result = greedyAlgorithm_check(AdjacencyList, verticesNumber);
-
-    if (result == 0) cout << result;
-    else
-    {    
-        cout << result << " ";
-
-        // Print adjacency list representation of a graph
-        for (int i = 0; i < verticesNumber; i++) {
-            cout << (AdjacencyList[i]->val) << " ";
-        }
-    }
-    cout << endl;
-}
-
-void graphBuilding(char method, int verticesNumber)
+Graph graphBuilding(int verticesNumber)
 {
     // Builds the edges
     Edge edges [verticesNumber * 2];
@@ -41,8 +23,7 @@ void graphBuilding(char method, int verticesNumber)
     // Builds the graph and colour its vertices
     Graph graph(edges, edges->edgeCount, verticesNumber, verticesColor);
 
-    sortAndprintGraph(method, graph.head, verticesNumber);
-
+    return graph;
 }
 
 int main()
@@ -60,8 +41,19 @@ int main()
         cout << "Invalid input format." << endl;
     }
 
-    // Uses the inputs and builds the graph
-    graphBuilding (method, verticesNumber);
+    Graph graph = graphBuilding (verticesNumber);
+    
+    sortMethodSelection(method, graph.head, graph.getSize());
+
+    bool result = greedyAlgorithm_check(graph.head, graph.getSize());
+
+    if (result == 0) cout << result;
+    else
+    {    
+        cout << result << " ";
+        graph.printGraph();
+    }
+    cout << endl;
 
     return 0;
 }

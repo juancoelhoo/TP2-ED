@@ -1,10 +1,10 @@
 #include "../include/Sort.hpp"
 
-void sortMethodSelection(char method, Node** adjacencyList, int verticesNumber){
+void sortMethodSelection(char method, Node** AdjacencyList, int VerticesNumber){
         switch (method)
         {
         case 'b':
-            bubbleSort(adjacencyList, verticesNumber);
+            bubbleSort(AdjacencyList, VerticesNumber);
             break;
         
         default:

@@ -82,22 +82,10 @@ void Graph::printList(Node* ptr)
     }
 }
 
-void Graph::printNeighboringVertices(int vertex) {
-    if (vertex >= 0 && vertex < N) {
-        Node* current = head[vertex];
-
-        if (current == nullptr) {
-            cout << "No neighboring vertices for node " << vertex << endl;
-        } else {
-            cout << "Neighboring vertices of node " << vertex << ": ";
-            while (current != nullptr) {
-                cout << current->next->val << " ";
-                current = current->next;
-            }
-            cout << endl;
-        }
-    } else {
-        cout << "Inneighborsid node index: " << vertex << endl;
+void Graph::printGraph()
+{
+    for (int i = 0; i < this->N; i++) {
+        cout << (this->head[i]->val) << " ";
     }
 }
 
