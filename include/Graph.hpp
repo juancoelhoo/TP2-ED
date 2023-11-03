@@ -9,8 +9,12 @@ using namespace std;
 // Data structure to store adjacency list nodes
 struct Node
 {
-    int val, neighbors, color;
+    int val, color;
     Node* next;
+
+    // Constructor for Node
+    Node(int vertex, int clr) : val(vertex), color(clr), next(nullptr) {}
+    Node() : val(-1), color(-1), next(nullptr) {}
 
     void verticesColoring(Node* vertices, int verticesNumber)
     {
@@ -22,6 +26,8 @@ struct Node
             colorIss >> vertices[i].color;
         }
     }   
+
+    
 
 };
 

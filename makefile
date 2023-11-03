@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/main.o  $(OBJ)/Graph.o  $(OBJ)/Sort.o
-HDRS = $(INC)/Graph.hpp $(INC)/Sort.hpp
+OBJS = $(OBJ)/main.o  $(OBJ)/Graph.o  $(OBJ)/Sort.o 
+HDRS = $(INC)/Graph.hpp $(INC)/Sort.hpp $(INC)/GreedyAlgorithm.hpp
 CFLAGS = -Wall -std=c++11 -c -g -I$(INC)
 
 EXE = $(BIN)/main

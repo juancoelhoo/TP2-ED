@@ -2,25 +2,21 @@
 
 Node* Graph::getAdjListNode(int dest, Node* head)
 {
-        Node* newNode = new Node;
-        newNode->neighbors = dest;
+        Node* newNode = new Node(-1, -1);
+        newNode->val = dest;  // Set the value of the new node
+        newNode->next = head;  // Set the next pointer to the current head
 
-        // point new node to the current head
-        newNode->next = head;
-
-        return newNode;
+    return newNode;
 }
 
 Graph::Graph(Edge edges[], unsigned int n, int N, Node* verticesColor)
 {
-    // Allocate memory
     head = new Node*[N]();
-    degrees = new int[N](); // Initialize degrees array to all zeros
+    degrees = new int[N]();
     this->N = N;
 
-    // Initialize head pointer for all vertices
     for (int i = 0; i < N; i++) {
-        head[i] = nullptr;
+        head[i] = new Node(i, verticesColor[i].color);
     }
 
     for (unsigned i = 0; i < n; i++)
@@ -28,18 +24,23 @@ Graph::Graph(Edge edges[], unsigned int n, int N, Node* verticesColor)
         int src = edges[i].src;
         int dest = edges[i].dest;
 
-        // Insert the edge only if it doesn't already exist
         if (!edgeExists(src, dest))
         {
-            Node* newNode = getAdjListNode(dest, head[src]);
-            head[src] = newNode;
+            Node* newNode = new Node(dest, verticesColor[dest].color);
+            newNode->next = nullptr;
+
+            if (head[src] == nullptr) {
+                head[src] = newNode;
+            } else {
+                Node* current = head[src];
+                while (current->next != nullptr) {
+                    current = current->next;
+                }
+                current->next = newNode;
+            }
+
             degrees[src]++;
         }
-    }
-
-    for (int i = 0; i < N; i++){
-        this->head[i]->color = verticesColor[i].color;
-        this->head[i]->val = i;
     }
 }
 
@@ -49,15 +50,14 @@ int Graph::getSize(){
 
 bool Graph::edgeExists(int src, int dest)
 {
-    // Check if the edge already exists in the adjacency list
-        Node* current = head[src];
-        while (current)
-        {
-            if (current->neighbors == dest)
-                return true;
-            current = current->next;
-        }
-        return false;
+    Node* current = head[src];
+    while (current)
+    {
+        if (current->val == dest)
+            return true;
+        current = current->next;
+    }
+    return false;
 }
 
 Graph::~Graph(){
@@ -77,11 +77,9 @@ void Graph::printList(Node* ptr)
 {
     while (ptr != nullptr)
     {
-        cout << " —> " << ptr->neighbors;
+        cout <<  ptr->val << " ";
         ptr = ptr->next;
     }
-    cout << endl;
-    
 }
 
 void Graph::printNeighboringVertices(int vertex) {
@@ -93,7 +91,7 @@ void Graph::printNeighboringVertices(int vertex) {
         } else {
             cout << "Neighboring vertices of node " << vertex << ": ";
             while (current != nullptr) {
-                cout << current->neighbors << " ";
+                cout << current->next->val << " ";
                 current = current->next;
             }
             cout << endl;
@@ -102,5 +100,7 @@ void Graph::printNeighboringVertices(int vertex) {
         cout << "Inneighborsid node index: " << vertex << endl;
     }
 }
+
+
 
 
