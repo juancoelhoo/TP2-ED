@@ -21,22 +21,10 @@ void sortAndprintGraph(char method, Node** AdjacencyList, int verticesNumber)
     cout << endl;
 }
 
-void graphBuilding(){
-    string input;
-    getline(cin, input);
-
-    char method;
-    int verticesNumber;
-    istringstream iss(input);
-    if (iss >> method >> verticesNumber) {
-        cout << "Character: " << method << endl;
-        cout << "Integer: " << verticesNumber << endl;
-    } else {
-        cout << "Invalid input format." << endl;
-    }
-
+void graphBuilding(char method, int verticesNumber)
+{
     // Builds the edges
-    Edge edges[verticesNumber * 2];
+    Edge edges [verticesNumber * 2];
     edges->edgeAssign(edges, verticesNumber);
 
     // Assigns the color of all vertices
@@ -58,9 +46,22 @@ void graphBuilding(){
 }
 
 int main()
-{
-    //Reads the input from the user
-    graphBuilding();
+{   
+    string input;
+    getline(cin, input);
+
+    char method;
+    int verticesNumber;
+    istringstream iss(input);
+    if (iss >> method >> verticesNumber) {
+        cout << "Character: " << method << "; ";
+        cout << "Integer: " << verticesNumber << endl;
+    } else {
+        cout << "Invalid input format." << endl;
+    }
+
+    // Uses the inputs and builds the graph
+    graphBuilding (method, verticesNumber);
 
     return 0;
 }
