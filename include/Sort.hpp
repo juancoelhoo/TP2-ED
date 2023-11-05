@@ -20,6 +20,14 @@ int partition(Node** arr, int low, int high);
 
 void quickSort(Node** arr, int low, int high);
 
+void merge(Node** arr, int const left, int const mid, int const right);
+
+void mergeSort(Node** arr, int const begin, int const end);
+
+void heapify(Node** arr, int N, int i);
+
+void heapSort(Node** arr, int N);
+
 
 // Sort a list of nodes using the specified sorting method ('method') based on the Node attributes
 // 'adjacencyList' is the list of nodes to be sorted, and 'verticesNumber' is the number of vertices in the graph

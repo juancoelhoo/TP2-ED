@@ -16,6 +16,9 @@ void sortMethodSelection(char method, Node** AdjacencyList, int VerticesNumber){
 
         case 'q':
             quickSort(AdjacencyList, 0, (VerticesNumber - 1));
+
+        case 'm':
+            mergeSort(AdjacencyList, 0, (VerticesNumber - 1));
         
         default:
             break;
@@ -99,6 +102,73 @@ void quickSort(Node** arr, int low, int high) {
         quickSort(arr, pi + 1, high);
     }
 }
+
+void merge(Node** arr, int const left, int const mid, int const right) {
+    int const subArrayOne = mid - left + 1;
+    int const subArrayTwo = right - mid;
+
+    // Create temp arrays
+    auto leftArray = new Node*[subArrayOne];
+    auto rightArray = new Node*[subArrayTwo];
+
+    // Copy data to temp arrays leftArray[] and rightArray[]
+    for (auto i = 0; i < subArrayOne; i++)
+        leftArray[i] = arr[left + i];
+    for (auto j = 0; j < subArrayTwo; j++)
+        rightArray[j] = arr[mid + 1 + j];
+
+    auto indexOfSubArrayOne = 0, indexOfSubArrayTwo = 0;
+    int indexOfMergedArray = left;
+
+    // Merge the temp arrays back into arr[left..right]
+    while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo) {
+        if (leftArray[indexOfSubArrayOne]->color < rightArray[indexOfSubArrayTwo]->color) {
+            arr[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+            indexOfSubArrayOne++;
+        } else if (leftArray[indexOfSubArrayOne]->color == rightArray[indexOfSubArrayTwo]->color) {
+            // If colors are the same, compare by vertex value
+            if (leftArray[indexOfSubArrayOne]->val < rightArray[indexOfSubArrayTwo]->val) {
+                arr[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+                indexOfSubArrayOne++;
+            } else {
+                arr[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+                indexOfSubArrayTwo++;
+            }
+        } else {
+            arr[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+            indexOfSubArrayTwo++;
+        }
+        indexOfMergedArray++;
+    }
+
+    // Copy the remaining elements of left[], if there are any
+    while (indexOfSubArrayOne < subArrayOne) {
+        arr[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+        indexOfSubArrayOne++;
+        indexOfMergedArray++;
+    }
+
+    // Copy the remaining elements of right[], if there are any
+    while (indexOfSubArrayTwo < subArrayTwo) {
+        arr[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+        indexOfSubArrayTwo++;
+        indexOfMergedArray++;
+    }
+    delete[] leftArray;
+    delete[] rightArray;
+}
+
+void mergeSort(Node** arr, int const begin, int const end) {
+    if (begin >= end)
+        return;
+
+    int mid = begin + (end - begin) / 2;
+    mergeSort(arr, begin, mid);
+    mergeSort(arr, mid + 1, end);
+    merge(arr, begin, mid, end);
+}
+
+
 
 
 
