@@ -80,4 +80,8 @@ public:
 
 };
 
+
+// Asks inputs from the user and builds the graph
+Graph graphBuilding(int verticesNumber);
+
 #endif

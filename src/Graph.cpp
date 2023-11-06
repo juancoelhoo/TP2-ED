@@ -11,9 +11,10 @@ Node* Graph::getAdjListNode(int dest, Node* head)
 
 Graph::Graph(Edge edges[], unsigned int n, int N, Node* verticesColor)
 {
-    head = new Node*[N]();
-    degrees = new int[N]();
+    this->head = new Node*[N]();
+    this->degrees = new int[N]();
     this->N = N;
+    
 
     for (int i = 0; i < N; i++) {
         head[i] = new Node(i, verticesColor[i].color);
@@ -45,7 +46,8 @@ Graph::Graph(Edge edges[], unsigned int n, int N, Node* verticesColor)
 }
 
 int Graph::getSize(){
-    return this->N;
+    unsigned int graphSize = this->N;
+    return graphSize;
 }
 
 bool Graph::edgeExists(int src, int dest)
@@ -89,6 +91,28 @@ void Graph::printGraph()
     }
 }
 
+Graph graphBuilding(int verticesNumber)
+{
+    const int vertices = verticesNumber;
+    // Builds the edges
+    Edge edges [verticesNumber * 2];
+    edges->edgeAssign(edges, verticesNumber);
 
+    // Assigns the color of all vertices
+    Node verticesColor[vertices];
+
+    for (int i = 0; i < vertices; i++) {
+        int color; // You can read the color from input
+        verticesColor[i].val = i; // Set the vertex ID
+        verticesColor[i].color = color; // Set the color
+    }
+    
+    verticesColor->verticesColoring(verticesColor, vertices);
+
+    // Builds the graph and colour its vertices
+    Graph graph(edges, edges[0].edgeCount, vertices, verticesColor);
+
+    return graph;
+}
 
 

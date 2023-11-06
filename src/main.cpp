@@ -3,28 +3,7 @@
 #include "../include/GreedyAlgorithm.hpp"
 #include "../include/Sort.hpp"
 
-Graph graphBuilding(int verticesNumber)
-{
-    // Builds the edges
-    Edge edges [verticesNumber * 2];
-    edges->edgeAssign(edges, verticesNumber);
 
-    // Assigns the color of all vertices
-    Node verticesColor[verticesNumber];
-
-    for (int i = 0; i < verticesNumber; i++) {
-        int color; // You can read the color from input
-        verticesColor[i].val = i; // Set the vertex ID
-        verticesColor[i].color = color; // Set the color
-    }
-    
-    verticesColor->verticesColoring(verticesColor, verticesNumber);
-
-    // Builds the graph and colour its vertices
-    Graph graph(edges, edges->edgeCount, verticesNumber, verticesColor);
-
-    return graph;
-}
 
 int main()
 {   
