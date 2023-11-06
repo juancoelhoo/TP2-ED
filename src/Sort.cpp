@@ -13,12 +13,19 @@ void sortMethodSelection(char method, Node** AdjacencyList, int VerticesNumber){
         
         case 'i':
             insertionSort(AdjacencyList, VerticesNumber);
+            break;
 
         case 'q':
             quickSort(AdjacencyList, 0, (VerticesNumber - 1));
+            break;
 
         case 'm':
             mergeSort(AdjacencyList, 0, (VerticesNumber - 1));
+            break;
+
+        case 'p':
+            heapSort(AdjacencyList, VerticesNumber);
+            break;
         
         default:
             break;
@@ -168,7 +175,34 @@ void mergeSort(Node** arr, int const begin, int const end) {
     merge(arr, begin, mid, end);
 }
 
+void heapify(Node** arr, int n, int i) {
+    int largest = i;
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
 
+    if (l < n && (arr[l]->color > arr[largest]->color || (arr[l]->color == arr[largest]->color && arr[l]->val > arr[largest]->val)))
+        largest = l;
+
+    if (r < n && (arr[r]->color > arr[largest]->color || (arr[r]->color == arr[largest]->color && arr[r]->val > arr[largest]->val)))
+        largest = r;
+
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+void heapSort(Node** arr, int n) {
+    // Build max-heap.
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    // Extracting elements from the heap.
+    for (int i = n - 1; i >= 0; i--) {
+        swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+}
 
 
 
