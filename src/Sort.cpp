@@ -1,4 +1,5 @@
 #include "../include/Sort.hpp"
+#include <cstdlib>
 
 void sortMethodSelection(char method, Node** AdjacencyList, int VerticesNumber){
         switch (method)
@@ -26,9 +27,14 @@ void sortMethodSelection(char method, Node** AdjacencyList, int VerticesNumber){
         case 'p':
             heapSort(AdjacencyList, VerticesNumber);
             break;
+
+        case 'y':
+            myMethodSort(AdjacencyList, 0, (VerticesNumber - 1));
+            break;
         
         default:
-            break;
+            std::cerr << "Invalid sorting method. Program will exit." << std::endl;
+            exit(1); // Exit with an error code (1 in this case)
         }
 }
 
@@ -202,6 +208,19 @@ void heapSort(Node** arr, int n) {
         swap(arr[0], arr[i]);
         heapify(arr, i, 0);
     }
+}
+
+void myMethodSort(Node** arr, int const begin, int const end) {
+    if (begin >= end)
+        return;
+
+    int mid = end;  // Set the pivot to be the rightmost element
+    int leftArraySize = mid - begin + 1;
+    int rightArraySize = end - mid;
+
+    mergeSort(arr, begin, mid);
+    mergeSort(arr, mid + 1, end);
+    merge(arr, begin, mid, end);
 }
 
 
