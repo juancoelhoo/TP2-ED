@@ -34,7 +34,7 @@ int main()
     cin >> method;
     cin >> verticesNumber;
 
-    Graph graph = graphBuilding (verticesNumber);
+    Graph graph = graphBuilding(verticesNumber);
     
     sortMethodSelection(method, graph.head, graph.getSize());
 

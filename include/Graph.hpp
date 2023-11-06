@@ -21,9 +21,6 @@ struct Node
             cin >> vertices[i].color;
         }
     }   
-
-    
-
 };
 
 
