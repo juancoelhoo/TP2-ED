@@ -11,26 +11,31 @@ bool greedyAlgorithm_check(Node** adjacencyList, int verticesNumber)
             continue;
         }
 
-        int smallerColorCount = 0;
+        Node* neighbourVertex = currentVertex->next;
 
-        Node* neighbourVertex = adjacencyList[i]->next;
+        bool verification[vertex_color - 1] = {false};
 
-        while (neighbourVertex != nullptr)
-        {
-            int neighborColor = neighbourVertex->color;
-            if (neighborColor < vertex_color) {
-                smallerColorCount++;
+        int j = 0; // Initialize j to keep track of the index in verification
+
+        for (auto it = neighbourVertex; it != nullptr; it = it->next) {
+            if (it->color < vertex_color) {
+                int index = it->color - 1;
+                if (index >= 0 && index < vertex_color - 1) {
+                    verification[index] = true;
+                }
             }
-
-            neighbourVertex = neighbourVertex->next;
+            j++;
         }
 
-        if (smallerColorCount < (vertex_color - 1)) {
-            return false;
+        for (int i = 0; i < vertex_color - 1; i++) {
+            if (!verification[i]) {
+                return false;
+            }
         }
     }
 
-    return true;
+    return true; // Return true if all vertices pass the check
 }
+
 
 #endif
