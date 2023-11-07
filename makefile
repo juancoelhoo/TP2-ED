@@ -11,12 +11,10 @@ CFLAGS = -Wall -std=c++11 -c -g -I$(INC)
 
 EXE = $(BIN)/tp2.out
 
-run:  $(EXE)
+run:$(EXE)
 		./$(EXE) 
 
-all: $(EXE)
-		./$(EXE)
-		
+all:$(EXE)
 
 
 $(BIN)/tp2.out: $(OBJS)
