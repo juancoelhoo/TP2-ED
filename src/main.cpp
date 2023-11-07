@@ -1,31 +1,40 @@
 #include <iostream>
+#include <exception> // Include the exception header
 #include "../include/Graph.hpp"
 #include "../include/GreedyAlgorithm.hpp"
 #include "../include/Sort.hpp"
 
-
-
 int main()
-{   
-    char method;
-    int verticesNumber;
+{
+    try {
+        char method;
+        int verticesNumber;
 
-    cin >> method;
-    cin >> verticesNumber;
+        std::cin >> method;
+        std::cin >> verticesNumber;
 
-    Graph graph = graphBuilding(verticesNumber);
-    
-    sortMethodSelection(method, graph.head, graph.getSize());
+        if (verticesNumber <= 0) 
+        {
+            throw std::invalid_argument("Number of vertices must be greater than zero.");
+        }
 
-    bool result = greedyAlgorithm_check(graph.head, graph.getSize());
+        Graph graph = graphBuilding(verticesNumber);
 
-    if (result == 0) cout << result;
-    else
-    {    
-        cout << result << " ";
-        graph.printGraph();
+        sortMethodSelection(method, graph.head, graph.getSize());
+
+        bool result = greedyAlgorithm_check(graph.head, graph.getSize());
+
+        if (result == 0) {
+            std::cout << result << std::endl;
+        } else {
+            std::cout << result << " ";
+            graph.printGraph();
+            std::cout << std::endl;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1; // Return a non-zero exit code to indicate an error
     }
-    cout << endl;
 
     return 0;
 }
