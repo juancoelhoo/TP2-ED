@@ -137,7 +137,7 @@ Graph graphBuilding(int verticesNumber)
 {
     const int vertices = verticesNumber;
     // Builds the edges
-    Edge edges [verticesNumber * 3];
+    Edge edges [verticesNumber * 1000];
     edges->edgeAssign(edges, verticesNumber);
 
     // Assigns the color of all vertices
