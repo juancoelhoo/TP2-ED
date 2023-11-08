@@ -215,8 +215,6 @@ void myMethodSort(Node** arr, int const begin, int const end) {
         return;
 
     int mid = end;  // Set the pivot to be the rightmost element
-    int leftArraySize = mid - begin + 1;
-    int rightArraySize = end - mid;
 
     mergeSort(arr, begin, mid);
     mergeSort(arr, mid + 1, end);

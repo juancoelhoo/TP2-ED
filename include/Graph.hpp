@@ -69,6 +69,13 @@ public:
     // Checks if the edge exists 
     bool edgeExists(int src, int dest);
 
+    // Sorts the Graph vertices by its color
+    void sortVertices(char method);
+
+    // Checks if it's possible to determine whether
+    // the graph is properly colored using a greedy algorithm
+    bool greedyAlgorithm_check();
+
     // Function to print all neighboring vertices of a given vertex
     void printList(Node* ptr);
 
@@ -79,7 +86,6 @@ public:
     ~Graph();
 
 };
-
 
 // Asks inputs from the user and builds the graph
 Graph graphBuilding(int verticesNumber);

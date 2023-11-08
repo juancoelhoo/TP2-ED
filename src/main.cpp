@@ -1,7 +1,6 @@
 #include <iostream>
-#include <exception> // Include the exception header
+#include <exception>
 #include "../include/Graph.hpp"
-#include "../include/GreedyAlgorithm.hpp"
 #include "../include/Sort.hpp"
 
 int main()
@@ -10,8 +9,7 @@ int main()
         char method;
         int verticesNumber;
 
-        std::cin >> method;
-        std::cin >> verticesNumber;
+        std::cin >> method >> verticesNumber;
 
         if (verticesNumber <= 0) 
         {
@@ -20,11 +18,11 @@ int main()
 
         Graph graph = graphBuilding(verticesNumber);
 
-        sortMethodSelection(method, graph.head, graph.getSize());
+        graph.sortVertices(method);
 
-        bool result = greedyAlgorithm_check(graph.head, graph.getSize());
+        bool result = graph.greedyAlgorithm_check();
 
-        if (result == 0) {
+        if (!result) {
             std::cout << result << std::endl;
         } else {
             std::cout << result << " ";
@@ -33,7 +31,7 @@ int main()
         }
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
-        return 1; // Return a non-zero exit code to indicate an error
+        return 1;
     }
 
     return 0;

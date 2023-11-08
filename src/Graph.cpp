@@ -1,4 +1,5 @@
 #include "../include/Graph.hpp"
+#include "../include/Sort.hpp"
 
 Node* Graph::getAdjListNode(int dest, Node* head)
 {
@@ -91,6 +92,47 @@ void Graph::printGraph()
     }
 }
 
+void Graph::sortVertices(char method)
+{
+    sortMethodSelection(method, this->head, this->N);
+}
+
+bool Graph::greedyAlgorithm_check()
+{
+    for (int i = 0; i < this->N; i++) {
+        Node* currentVertex = this->head[i];
+        int vertex_color = currentVertex->color;
+        if (vertex_color == 1) {
+            continue;
+        }
+
+        Node* neighbourVertex = currentVertex->next;
+
+        bool verification[vertex_color - 1] = {false};
+
+        int j = 0;
+
+        for (auto it = neighbourVertex; it != nullptr; it = it->next) {
+            if (it->color < vertex_color) {
+                int index = it->color - 1;
+                if (index >= 0 && index < vertex_color - 1) {
+                    verification[index] = true;
+                }
+            }
+            j++;
+        }
+
+        for (int i = 0; i < vertex_color - 1; i++) {
+            if (!verification[i]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+
 Graph graphBuilding(int verticesNumber)
 {
     const int vertices = verticesNumber;
@@ -100,12 +142,6 @@ Graph graphBuilding(int verticesNumber)
 
     // Assigns the color of all vertices
     Node verticesColor[vertices];
-
-    for (int i = 0; i < vertices; i++) {
-        int color; // You can read the color from input
-        verticesColor[i].val = i; // Set the vertex ID
-        verticesColor[i].color = color; // Set the color
-    }
     
     verticesColor->verticesColoring(verticesColor, vertices);
 
